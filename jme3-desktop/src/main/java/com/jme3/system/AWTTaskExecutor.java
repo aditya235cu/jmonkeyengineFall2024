@@ -71,7 +71,7 @@ public class AWTTaskExecutor {
   }
 
   public List<Runnable> getWaitingTasks(){
-    return waitTasks;
+    return waitTasks
   }
   
   /**
