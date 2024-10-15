@@ -107,7 +107,7 @@ public class AWTTaskExecutor {
         // This try catch block enable to free the lock in case of any unexpected error.
       }
       
-      waitTasks.clear()
+      waitTasks.clear();
       
       lock.readLock().unlock();
   }
