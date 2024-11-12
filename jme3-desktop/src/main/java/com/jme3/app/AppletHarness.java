@@ -61,7 +61,7 @@ public class AppletHarness extends Applet {
     protected LegacyApplication app;
 
     protected String appClass;
-    protected URL appCfg = null;
+    protected URL appCfg = null
     protected URL assetCfg = null;
 
     public static Applet getApplet(Application app){
