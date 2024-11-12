@@ -65,7 +65,7 @@ public class AppletHarness extends Applet {
     protected URL assetCfg = null;
 
     public static Applet getApplet(Application app){
-        return appToApplet.get(app)
+        return appToApplet.get(app);
     }
 
     @SuppressWarnings("unchecked")
