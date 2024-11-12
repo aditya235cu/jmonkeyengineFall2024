@@ -130,8 +130,6 @@ public class MjpegFileWriter implements AutoCloseable {
         }
         byte[] data = baos.toByteArray();
         aviOutput.write(data);
-        imageData = null;
-
         numFrames++; //add a frame
         position += data.length;
     }
