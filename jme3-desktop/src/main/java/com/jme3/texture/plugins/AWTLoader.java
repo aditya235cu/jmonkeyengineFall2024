@@ -76,30 +76,57 @@ public class AWTLoader implements AssetLoader {
         return null;
     }
 
-    private void flipImage(byte[] img, int width, int height, int bpp){
+    private void flipImage(Object img, int width, int height, int bpp) {
         int scSz = (width * bpp) / 8;
-        byte[] sln = new byte[scSz];
+        int elementSize = img instanceof byte[] ? 1 : (img instanceof short[] ? 2 : 0);
+
+        if (elementSize == 0) {
+            throw new IllegalArgumentException("Unsupported array type");
+        }
+
+        scSz /= elementSize; // Adjust for short type
+
+        Object sln = (elementSize == 1) ? new byte[scSz] : new short[scSz];
+
         int y2 = 0;
-        for (int y1 = 0; y1 < height / 2; y1++){
+        for (int y1 = 0; y1 < height / 2; y1++) {
             y2 = height - y1 - 1;
-            System.arraycopy(img, y1 * scSz, sln, 0,         scSz);
-            System.arraycopy(img, y2 * scSz, img, y1 * scSz, scSz);
-            System.arraycopy(sln, 0,         img, y2 * scSz, scSz);
+            if (elementSize == 1) {
+                System.arraycopy(img, y1 * scSz, sln, 0, scSz);
+                System.arraycopy(img, y2 * scSz, img, y1 * scSz, scSz);
+                System.arraycopy(sln, 0, img, y2 * scSz, scSz);
+            } else if (elementSize == 2) {
+                System.arraycopy(img, y1 * scSz, sln, 0, scSz);
+                System.arraycopy(img, y2 * scSz, img, y1 * scSz, scSz);
+                System.arraycopy(sln, 0, img, y2 * scSz, scSz);
+            }
         }
     }
-    
-    private void flipImage(short[] img, int width, int height, int bpp){
-        int scSz = (width * bpp) / 8;
-        scSz /= 2; // Because shorts are 2 bytes
-        short[] sln = new short[scSz];
-        int y2 = 0;
-        for (int y1 = 0; y1 < height / 2; y1++){
-            y2 = height - y1 - 1;
-            System.arraycopy(img, y1 * scSz, sln, 0,         scSz);
-            System.arraycopy(img, y2 * scSz, img, y1 * scSz, scSz);
-            System.arraycopy(sln, 0,         img, y2 * scSz, scSz);
-        }
-    }
+
+    // private void flipImage(byte[] img, int width, int height, int bpp){
+    // int scSz = (width * bpp) / 8;
+    // byte[] sln = new byte[scSz];
+    // int y2 = 0;
+    // for (int y1 = 0; y1 < height / 2; y1++){
+    // y2 = height - y1 - 1;
+    // System.arraycopy(img, y1 * scSz, sln, 0, scSz);
+    // System.arraycopy(img, y2 * scSz, img, y1 * scSz, scSz);
+    // System.arraycopy(sln, 0, img, y2 * scSz, scSz);
+    // }
+    // }
+
+    // private void flipImage(short[] img, int width, int height, int bpp){
+    // int scSz = (width * bpp) / 8;
+    // scSz /= 2; // Because shorts are 2 bytes
+    // short[] sln = new short[scSz];
+    // int y2 = 0;
+    // for (int y1 = 0; y1 < height / 2; y1++){
+    // y2 = height - y1 - 1;
+    // System.arraycopy(img, y1 * scSz, sln, 0, scSz);
+    // System.arraycopy(img, y2 * scSz, img, y1 * scSz, scSz);
+    // System.arraycopy(sln, 0, img, y2 * scSz, scSz);
+    // }
+    // }
 
     public Image load(BufferedImage img, boolean flipY){
         int width = img.getWidth();
