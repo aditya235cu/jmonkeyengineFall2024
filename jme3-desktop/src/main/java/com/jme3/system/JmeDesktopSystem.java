@@ -190,6 +190,7 @@ public class JmeDesktopSystem extends JmeSystemDelegate {
 
 
 
+
     @SuppressWarnings("unchecked")
     private <T> T newObject(String className) {
         try {
@@ -207,13 +208,13 @@ public class JmeDesktopSystem extends JmeSystemDelegate {
         return null;
     }
 
-    private JmeContext newContextJogl(AppSettings settings, Type contextType) {
-        return null;
-    }
 
-    private JmeContext newContextLwjgl(AppSettings settings, Type contextType) {
-        return null;
-    }
+
+
+
+
+
+
 
     @Override
     public AudioRenderer newAudioRenderer(AppSettings settings) {
@@ -241,6 +242,14 @@ public class JmeDesktopSystem extends JmeSystemDelegate {
         }
 
         return new ALAudioRenderer(al, alc, efx);
+    }
+
+    private JmeContext newContextLwjgl(AppSettings settings, Type contextType) {
+        return null;
+    }
+
+    private JmeContext newContextJogl(AppSettings settings, Type contextType) {
+        return null;
     }
 
     @Override
