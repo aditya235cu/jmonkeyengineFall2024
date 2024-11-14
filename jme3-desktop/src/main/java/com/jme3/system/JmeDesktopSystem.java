@@ -204,7 +204,8 @@ public class JmeDesktopSystem extends JmeSystemDelegate {
                 | NoSuchMethodException | SecurityException ex) {
             logger.log(Level.SEVERE, "Failed to create context", ex);
         }
-        int a=0;
+
+        
 
         return null;
     }
