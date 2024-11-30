@@ -1,6 +1,10 @@
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
+plugins {
+    id "org.sonarqube" version "5.1.0.4882"
+}
+
 buildscript {
     repositories {
         mavenCentral()
@@ -61,9 +65,7 @@ subprojects {
     }
 }
 
-plugins {
-    id "org.sonarqube" version "5.1.0.4882"
-}
+
 
 task run(dependsOn: ':jme3-examples:run') {
     description = 'Run the jME3 examples'
