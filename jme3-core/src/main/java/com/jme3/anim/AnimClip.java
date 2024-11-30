@@ -103,8 +103,9 @@ public class AnimClip implements JmeCloneable, Savable {
      * @return the pre-existing array
      */
     public AnimTrack[] getTracks() {
-        return tracks;
+        return tracks != null ? tracks.clone() : null;
     }
+
 
     /**
      * Create a shallow clone for the JME cloner.

@@ -63,6 +63,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
 public class SceneLoader extends DefaultHandler implements AssetLoader {
 
     private static final int DEFAULT_CAM_WIDTH = 640;
@@ -524,7 +527,30 @@ public class SceneLoader extends DefaultHandler implements AssetLoader {
             // Kirill 30.06.2011
             // Now, hack is applied for both desktop and android to avoid
             // checking with JmeSystem.
-            SAXParserFactory factory = SAXParserFactory.newInstance();
+            /*class XMLParser {
+                public void main(String[] args) {*/
+            SAXParserFactory factory = null;
+            try {
+                factory = SAXParserFactory.newInstance();
+
+                // Prevent XXE attacks by disabling external entities
+                factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+                factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+                factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+
+                // Optional: Enable secure processing
+                factory.setFeature("http://javax.xml.XMLConstants/feature/secure-processing", true);
+
+                // Create a new SAXParser
+                SAXParser saxParser = factory.newSAXParser();
+
+                System.out.println("SAXParser configured securely.");
+                // Add your XML parsing logic here
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //}
+            //}
             factory.setNamespaceAware(true);
             XMLReader xr = factory.newSAXParser().getXMLReader();
 
