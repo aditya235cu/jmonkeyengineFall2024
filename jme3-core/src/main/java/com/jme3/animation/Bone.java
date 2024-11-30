@@ -294,7 +294,7 @@ public final class Bone implements Savable, JmeCloneable {
      * @return The scale of the bone in model space.
      */
     public Vector3f getModelSpaceScale() {
-        return modelScale;
+        //return modelScale;
     }
 
     /**
