@@ -37,6 +37,10 @@
   "traceSpoonLogFileName": "spoon.log",
   "check-license": false,
   "logging": "OFF",
+<<<<<<< Updated upstream
   "project": "C:/Users/amalg/OneDrive/Desktop/software comprehension and maintenance/case study 3/group repository clone project/jmonkeyengineFall2024",
+=======
+  "project": "C:/Users/amalg/OneDrive/Desktop/case study 3 final grand final finally final/group repository clone project/jmonkeyengineFall2024",
+>>>>>>> Stashed changes
   "type": "sources"
 }
