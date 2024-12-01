@@ -248,6 +248,7 @@ public class VideoRecorderAppState extends AbstractAppState {
                         return null;
                     }
                 });
+
             } catch (InterruptedException ex) {
                 Logger.getLogger(VideoRecorderAppState.class.getName()).log(Level.SEVERE, null, ex);
             }
